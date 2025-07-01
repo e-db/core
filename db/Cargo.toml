@@ -1,0 +1,8 @@
+[package]
+name = "db"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+sqlx = { version = "0.7", features = ["postgres", "runtime-tokio-native-tls"] }
+tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
