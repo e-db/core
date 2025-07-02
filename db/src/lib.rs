@@ -43,22 +43,22 @@ impl Condition {
     fn build(&self, args: &mut Vec<Value>, idx: &mut i32) -> String {
         match self {
             Condition::Eq(col, val) => match val {
-                Value::Null => format!("{} IS NULL", col),
+                Value::Null => format!("{col} IS NULL"),
                 _ => {
                     *idx += 1;
                     args.push(val.clone());
-                    format!("{} = ${}", col, idx)
+                    format!("{col} = ${idx}")
                 }
             },
             Condition::And(l, r) => {
                 let lsql = l.build(args, idx);
                 let rsql = r.build(args, idx);
-                format!("({}) AND ({})", lsql, rsql)
+                format!("({lsql}) AND ({rsql})")
             }
             Condition::Or(l, r) => {
                 let lsql = l.build(args, idx);
                 let rsql = r.build(args, idx);
-                format!("({}) OR ({})", lsql, rsql)
+                format!("({lsql}) OR ({rsql})")
             }
         }
     }
@@ -87,7 +87,7 @@ impl Table {
                 match v {
                     Value::Null => placeholders.push("NULL".to_string()),
                     _ => {
-                        placeholders.push(format!("${}", idx));
+                        placeholders.push(format!("${idx}"));
                         idx += 1;
                         binds.push(v);
                     }
