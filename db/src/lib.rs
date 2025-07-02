@@ -24,7 +24,7 @@ pub struct Table {
     pub columns: Vec<Column>,
 }
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, PartialEq)]
 pub enum Value {
     Int(i64),
     Text(String),
