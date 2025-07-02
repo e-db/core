@@ -6,3 +6,7 @@ edition = "2024"
 [dependencies]
 sqlx = { version = "0.7", features = ["postgres", "runtime-tokio-native-tls"] }
 tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
+
+[dev-dependencies]
+testcontainers = "0.24"
+testcontainers-modules = { version = "0.12", features = ["postgres"] }
